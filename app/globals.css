@@ -2,26 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
+  font-family: "Switzer", sans-serif;
+  @apply bg-bg text-white;
+}
+
+.card {
+  @apply rounded-3xl border-border border bg-card p-7;
+}
+
+button {
+  @apply border-border border rounded-full px-5 py-2.5 bg-button;
+}
+
+nav {
   background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    90deg,
+    rgba(146, 127, 199, 0.02) 0%,
+    rgba(179, 165, 219, 0.04) 100%
+  );
+  @apply rounded-full border-border border p-2.5 px-7;
+}
+
+.mapboxgl-canvas {
+  @apply rounded-3xl;
+}
+
+@font-face {
+  font-family: "CalSans";
+  src: url("../public/fonts/CalSans-SemiBold.otf") format("opentype");
 }
