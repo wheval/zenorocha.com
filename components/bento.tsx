@@ -153,20 +153,20 @@ export default function Bento({ recentTracks }: { recentTracks: any }) {
                 <Image
                   src={peace}
                   alt="Peace sign"
-                  className="object-top object-cover w-40"
+                  className="object-top hidden sm:block object-cover w-40"
                 />
                 <div className="p-7 h-full space-y-5 flex justify-center w-full flex-col">
                   <h4 className="font-[CalSans] text-4xl">
                     some technologies i use.
                   </h4>
                   <div className="flex items-center w-full justify-between">
-                    <Image src={javascript} alt="" className="w-6 sm:w-16" />
-                    <Image src={typescript} alt="" className="w-6 sm:w-16" />
-                    <Image src={nodejs} alt="" className="w-6 sm:w-16" />
-                    <Image src={reactIcon} alt="" className="w-6 sm:w-16" />
-                    <Image src={flutter} alt="" className="w-6 sm:w-16" />
-                    <Image src={github} alt="" className="w-6 sm:w-16" />
-                    <Image src={vscode} alt="" className="w-6 sm:w-16" />
+                    <Image src={javascript} alt="" className="w-9 sm:w-16" />
+                    <Image src={typescript} alt="" className="w-9 sm:w-16" />
+                    <Image src={nodejs} alt="" className="w-9 sm:w-16" />
+                    <Image src={reactIcon} alt="" className="w-9 sm:w-16" />
+                    <Image src={flutter} alt="" className="w-9 sm:w-16" />
+                    <Image src={github} alt="" className="w-9 sm:w-16" />
+                    <Image src={vscode} alt="" className="w-9 sm:w-16" />
                   </div>
                 </div>
               </div>
