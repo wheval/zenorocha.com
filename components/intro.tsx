@@ -8,7 +8,7 @@ export default function Intro() {
   return (
     <motion.div
       ref={scope}
-      className="flex z-[999] items-center flex-col justify-center text-center fixed h-[100dvh] w-full overflow-hidden left-0 top-0"
+      className="sm:flex hidden z-[999] items-center flex-col justify-center text-center fixed h-[100dvh] w-full overflow-hidden left-0 top-0"
     >
       <LampContainer>
         <motion.div>
