@@ -25,13 +25,14 @@ import { PinContainer } from "./pin";
 import { InfiniteMovingCards } from "./infiniteCards";
 import MovingBorder from "./moving-border";
 import { cn } from "@/utils/cn";
+import Link from "next/link";
 
 export default function Bento({ recentTracks }: { recentTracks: any }) {
   return (
     <div className="space-y-3">
       {/* top bento  */}
-      <div className="grid gap-3 grid-cols-5">
-        <div className=" col-span-3">
+      <div className="grid gap-3 lg:grid-cols-5">
+        <div className=" lg:col-span-3">
           <BackgroundGradient>
             <div className="card">
               <img src="/memoji.png" className="w-56" alt="" />
@@ -42,11 +43,12 @@ export default function Bento({ recentTracks }: { recentTracks: any }) {
             </div>
           </BackgroundGradient>
         </div>
-        <div className="col-span-2">
+        <div className="lg:col-span-2">
           <PinContainer title="Port Harcourt" className="h-full w-full">
             <div className="card !p-0 h-full w-full">
               <div className="w-full h-full flex relative items-center justify-center">
                 <Map
+                  dragPan={false}
                   scrollZoom={false}
                   mapboxAccessToken="pk.eyJ1IjoiemlsbGFsaWtlc21hcHMiLCJhIjoiY2xyam56OXkyMDR2NjJrb2p3cXU2MjJiMyJ9.WdX5q0xnDQIUQo7hzh1NiQ"
                   mapLib={import("mapbox-gl")}
@@ -72,9 +74,9 @@ export default function Bento({ recentTracks }: { recentTracks: any }) {
       </div>
 
       {/* bottom bento  */}
-      <div className="grid gap-3 grid-cols-7">
+      <div className="grid gap-3 lg:grid-cols-7">
         {/* right bento  */}
-        <div className="col-span-2 grid grid-cols-1 gap-3 grid-rows-2">
+        <div className="lg:col-span-2 order-2 lg:order-1 grid lg:grid-cols-1 gap-3 lg:grid-rows-2">
           <motion.div
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: false }}
@@ -91,7 +93,7 @@ export default function Bento({ recentTracks }: { recentTracks: any }) {
                 />
               </MovingBorder>
             </div>
-            <div className="card z-50 h-full w-full flex flex-col justify-between antialiased">
+            <div className="card z-50 h-full w-full gap-5 lg:gap-0 flex flex-col justify-between antialiased">
               <Image src={spotify} alt="spotify icon" className="w-16" />
 
               <div>
@@ -114,21 +116,22 @@ export default function Bento({ recentTracks }: { recentTracks: any }) {
             viewport={{ once: false }}
             transition={{ duration: 0.5, delay: 0.5 }}
             initial={{ scale: 0.1, opacity: 0 }}
-            className="card flex flex-col justify-between"
+            className="card flex flex-col gap-5 lg:gap-0 justify-between"
           >
             <h4 className="font-[CalSans] text-3xl">
               let me bring your projects and ideas to life.
             </h4>
-
-            <button className="w-full flex items-center gap-2.5 text-3xl">
-              <Image src={envelope} alt="" />
-              email me
-            </button>
+            <a href="mailto:emmanuelngoka778@gmail.com" className="w-full">
+              <button className="w-full flex items-center gap-2.5 text-3xl">
+                <Image src={envelope} alt="" />
+                email me
+              </button>
+            </a>
           </motion.div>
         </div>
 
         {/* left bento */}
-        <div className="col-span-5 grid grid-cols-1 gap-3 grid-rows-7">
+        <div className="lg:col-span-5 grid lg:grid-cols-1 gap-3 grid-rows-7">
           <motion.div
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: false }}
@@ -157,13 +160,13 @@ export default function Bento({ recentTracks }: { recentTracks: any }) {
                     some technologies i use.
                   </h4>
                   <div className="flex items-center w-full justify-between">
-                    <Image src={javascript} alt="" className="w-16" />
-                    <Image src={typescript} alt="" className="w-16" />
-                    <Image src={nodejs} alt="" className="w-16" />
-                    <Image src={reactIcon} alt="" className="w-[64px]" />
-                    <Image src={flutter} alt="" className="w-16" />
-                    <Image src={github} alt="" className="w-16" />
-                    <Image src={vscode} alt="" className="w-16" />
+                    <Image src={javascript} alt="" className="w-6 sm:w-16" />
+                    <Image src={typescript} alt="" className="w-6 sm:w-16" />
+                    <Image src={nodejs} alt="" className="w-6 sm:w-16" />
+                    <Image src={reactIcon} alt="" className="w-6 sm:w-16" />
+                    <Image src={flutter} alt="" className="w-6 sm:w-16" />
+                    <Image src={github} alt="" className="w-6 sm:w-16" />
+                    <Image src={vscode} alt="" className="w-6 sm:w-16" />
                   </div>
                 </div>
               </div>
@@ -196,42 +199,53 @@ export default function Bento({ recentTracks }: { recentTracks: any }) {
       </div>
       {/* socials  */}
       <div className="w-full grid lg:grid-cols-4 gap-5 items-center">
-        <motion.button
-          whileInView={{ scale: 1, opacity: 1 }}
-          viewport={{ once: false }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          initial={{ scale: 0.1, opacity: 0 }}
-          className="btn col-span-1 text-2xl font-[CalSans] tracking-wide"
+        <a href="https://github.com/zillalikestocode" className="lg:col-span-1">
+          <motion.button
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            initial={{ scale: 0.1, opacity: 0 }}
+            className="btn lg:col-span-1 w-full text-2xl font-[CalSans] tracking-wide"
+          >
+            github
+          </motion.button>
+        </a>
+        <a className="lg:col-span-1" href="https://twitter.com/_zxlla">
+          <motion.button
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            initial={{ scale: 0.1, opacity: 0 }}
+            className="btn w-full lg:col-span-1 text-2xl font-[CalSans] tracking-wide"
+          >
+            twitter
+          </motion.button>
+        </a>
+        <a className="lg:col-span-1" href="https://linkedin.com/in/engoka">
+          <motion.button
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            initial={{ scale: 0.1, opacity: 0 }}
+            className="btn w-full lg:col-span-1 text-2xl font-[CalSans] tracking-wide"
+          >
+            linkedin
+          </motion.button>
+        </a>
+        <a
+          className="lg:col-span-1"
+          href="https://instagram.com/the_emmanuelngoka"
         >
-          github
-        </motion.button>
-        <motion.button
-          whileInView={{ scale: 1, opacity: 1 }}
-          viewport={{ once: false }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          initial={{ scale: 0.1, opacity: 0 }}
-          className="btn col-span-1 text-2xl font-[CalSans] tracking-wide"
-        >
-          twitter
-        </motion.button>
-        <motion.button
-          whileInView={{ scale: 1, opacity: 1 }}
-          viewport={{ once: false }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          initial={{ scale: 0.1, opacity: 0 }}
-          className="btn col-span-1 text-2xl font-[CalSans] tracking-wide"
-        >
-          linkedin
-        </motion.button>
-        <motion.button
-          whileInView={{ scale: 1, opacity: 1 }}
-          viewport={{ once: false }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          initial={{ scale: 0.1, opacity: 0 }}
-          className="btn col-span-1 text-2xl font-[CalSans] tracking-wide"
-        >
-          instagram
-        </motion.button>
+          <motion.button
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            initial={{ scale: 0.1, opacity: 0 }}
+            className="btn w-full lg:col-span-1 text-2xl font-[CalSans] tracking-wide"
+          >
+            instagram
+          </motion.button>
+        </a>
       </div>
     </div>
   );
