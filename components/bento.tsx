@@ -88,7 +88,7 @@ export default function Bento({ recentTracks }: { recentTracks: any }) {
               <MovingBorder duration={3000} rx="30%" ry="30%">
                 <div
                   className={cn(
-                    "h-20 w-32 opacity-[0.8] bg-[radial-gradient(var(--neutral-400)_20%,transparent_80%)]"
+                    "h-20 w-32 opacity-[0.8] bg-[radial-gradient(var(--neutral-400)_20%,transparent_80%)]",
                   )}
                 />
               </MovingBorder>
@@ -143,7 +143,7 @@ export default function Bento({ recentTracks }: { recentTracks: any }) {
               <MovingBorder duration={3000} rx="30%" ry="30%">
                 <div
                   className={cn(
-                    "h-20 w-32 opacity-[0.8] bg-[radial-gradient(var(--neutral-400)_20%,transparent_80%)]"
+                    "h-20 w-32 opacity-[0.8] bg-[radial-gradient(var(--neutral-400)_20%,transparent_80%)]",
                   )}
                 />
               </MovingBorder>
@@ -177,22 +177,13 @@ export default function Bento({ recentTracks }: { recentTracks: any }) {
             viewport={{ once: false }}
             transition={{ duration: 0.5, delay: 0.5 }}
             initial={{ scale: 0.1, opacity: 0 }}
-            className=" relative rounded-3xl flex !p-[1px] row-span-4 overflow-hidden"
+            className=" rounded-3xl flex row-span-4 overflow-hidden"
           >
-            <div className="absolute inset-0">
-              <MovingBorder duration={3000} rx="30%" ry="30%">
-                <div
-                  className={cn(
-                    "h-20 w-32 opacity-[0.8] bg-[radial-gradient(var(--neutral-400)_20%,transparent_80%)]"
-                  )}
-                />
-              </MovingBorder>
-            </div>
             <div className="card z-50 h-full w-full !p-0">
               <h4 className="font-[CalSans] p-7 pb-0 text-3xl">
                 featured projects
               </h4>
-              <InfiniteMovingCards speed="normal" />
+              <InfiniteMovingCards />
             </div>
           </motion.div>
         </div>
