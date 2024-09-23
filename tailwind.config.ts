@@ -15,7 +15,8 @@ const config: Config = {
     extend: {
       colors: {
         bg: "#161616",
-        card: "#1D1C20",
+        card: "#1e1e1e",
+        // card: "#1D1C20",
         button: "#ffffff08",
         border: "#ffffff14",
       },
@@ -42,7 +43,7 @@ const config: Config = {
 function addVariablesForColors({ addBase, theme }: any) {
   let allColors = flattenColorPalette(theme("colors"));
   let newVars = Object.fromEntries(
-    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val]),
   );
 
   addBase({

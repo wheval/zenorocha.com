@@ -52,7 +52,7 @@ export const InfiniteMovingCards = () => {
   );
 };
 
-function ProjectItem({
+export function ProjectItem({
   item,
   index,
   setShow,
@@ -68,32 +68,33 @@ function ProjectItem({
   return (
     <>
       <motion.li
-        whileHover={{ y: -15 }}
         layoutId={item.name + String(index)}
-        className="w-[350px] max-w-full justify-center flex h-full rounded-2xl flex-shrink-0 md:w-[450px]"
+        className="w-full relative overflow-hidden justify-center flex relative h-full rounded-3xl flex-shrink-0"
       >
-        <div className="p-4 absolute w-full flex items-center">
-          <div className="ml-auto flex items-center gap-2.5">
-            <a href={item.url}>
-              <button className="bg-neutral-800 rounded-full p-2">
-                <Link2Icon />
+        {index !== 1 && (
+          <div className="p-4 absolute z-50 w-full flex items-center">
+            <div className="ml-auto flex items-center gap-2.5">
+              <a href={item.url}>
+                <button className="bg-neutral-800 rounded-full p-2">
+                  <Link2Icon />
+                </button>
+              </a>
+              <button
+                onClick={() => {
+                  setLayoutId(item.title + String(index));
+                  setProject(item);
+                  setTimeout(() => setShow(true), 300);
+                }}
+                className="bg-neutral-800 rounded-full p-2"
+              >
+                <ArrowLeft className="rotate-[135deg]" />
               </button>
-            </a>
-            <button
-              onClick={() => {
-                setLayoutId(item.name + String(index));
-                setProject(item);
-                setTimeout(() => setShow(true), 300);
-              }}
-              className="bg-neutral-800 rounded-full p-2"
-            >
-              <ArrowLeft className="rotate-[135deg]" />
-            </button>
+            </div>
           </div>
-        </div>
+        )}
         <img
           src={item.image}
-          className="h-full w-full object-cover rounded-2xl"
+          className=" w-full -translate-y-5 object-cover rounded-3xl"
           alt=""
         />
       </motion.li>
@@ -101,7 +102,7 @@ function ProjectItem({
   );
 }
 
-function ProjectPopup({
+export function ProjectPopup({
   layoutId,
   closePopup,
   project,
@@ -111,22 +112,22 @@ function ProjectPopup({
   closePopup: any;
 }) {
   return (
-    <div className="fixed left-0 right-0 bottom-0 top-0 z-[99] h-screen w-[100dvw] flex items-center flex-col justify-center">
+    <div className="fixed left-0 right-0 bottom-0 top-0 z-[80] h-screen w-[100dvw] p-5 md:p-0 flex items-center flex-col justify-center">
       <div
-        className="absolute bg-neutral-800/30 backdrop-blur-lg w-screen h-screen -z-10"
+        className="absolute bg-neutral-800/30 backdrop-blur-lg w-screen h-[100dvh] -z-10"
         onClick={closePopup}
       />
       <motion.div
         layoutId={layoutId}
-        className="rounded-3xl flex gap-5 z-50 card"
+        className="rounded-3xl flex gap-5 z-50 card flex-col sm:flex-row"
       >
-        <div className="h-[50vh] w-72 grow">
+        <div className="md:h-[50vh] md:w-72 w-full grow">
           <img
             src={project.image}
             className="h-full object-cover rounded-lg w-full"
           />
         </div>
-        <div className="max-w-md flex flex-col">
+        <div className="sm:max-w-md flex flex-col">
           <div className="mb-5">
             <div className="flex mb-2 items-end gap-2.5">
               <h4 className="font-[CalSans] text-3xl">{project.title}</h4>

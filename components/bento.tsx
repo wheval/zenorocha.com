@@ -3,10 +3,11 @@ import Image from "next/image";
 import spotify from "../assets/icons/spotify.svg";
 // import { Play } from "lucide-react";
 import play from "../assets/icons/start.svg";
-import { AudioLines } from "lucide-react";
+import { ArrowLeft, AudioLines, Link2Icon } from "lucide-react";
 import peace from "../assets/peace.png";
 import mapboxgl from "mapbox-gl";
 import { motion } from "framer-motion";
+import { projects } from "@/assets/data/data";
 
 // custom icons
 import reactIcon from "../assets/icons/react (2).svg";
@@ -22,54 +23,55 @@ import Map, { GeolocateControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { BackgroundGradient } from "./glowing-card";
 import { PinContainer } from "./pin";
-import { InfiniteMovingCards } from "./infiniteCards";
+import {
+  InfiniteMovingCards,
+  ProjectItem,
+  ProjectPopup,
+} from "./infiniteCards";
 import MovingBorder from "./moving-border";
 import { cn } from "@/utils/cn";
 import Link from "next/link";
 
-export default function Bento({ recentTracks }: { recentTracks: any }) {
+export default function Bento({
+  recentTracks,
+  textEnter,
+  textLeave,
+}: {
+  recentTracks: any;
+  textEnter: any;
+  textLeave: any;
+}) {
+  const [layoutId, setLayoutId] = useState("");
+  const [showPop, setShow] = useState(false);
+  const [activeProject, setProject] = useState<any>();
   return (
     <div className="space-y-3">
+      {showPop && (
+        <ProjectPopup
+          project={activeProject}
+          layoutId={layoutId}
+          closePopup={() => setShow(false)}
+        />
+      )}
       {/* top bento  */}
       <div className="grid gap-3 lg:grid-cols-5">
-        <div className=" lg:col-span-3">
-          <BackgroundGradient>
-            <div className="card">
-              <img src="/memoji.png" className="w-56" alt="" />
-              <p className="font-[CalSans] text-4xl">
-                Emmanuel is a fullstack software engineer from Nigeria currently
-                freelancing.
-              </p>
-            </div>
-          </BackgroundGradient>
+        <div className="lg:col-span-3">
+          <div className="card">
+            <img src="/memoji.png" className="w-56" alt="" />
+            <p
+              onMouseEnter={textEnter}
+              onMouseLeave={textLeave}
+              className="font-[CalSans] text-4xl"
+            >
+              Emmanuel is a fullstack software engineer from Nigeria currently
+              freelancing.
+            </p>
+          </div>
         </div>
-        <div className="lg:col-span-2">
-          <PinContainer title="Port Harcourt" className="h-full w-full">
-            <div className="card !p-0 h-full w-full">
-              <div className="w-full h-full flex relative items-center justify-center">
-                <Map
-                  dragPan={false}
-                  scrollZoom={false}
-                  mapboxAccessToken="pk.eyJ1IjoiemlsbGFsaWtlc21hcHMiLCJhIjoiY2xyam56OXkyMDR2NjJrb2p3cXU2MjJiMyJ9.WdX5q0xnDQIUQo7hzh1NiQ"
-                  mapLib={import("mapbox-gl")}
-                  initialViewState={{
-                    latitude: 4.81316,
-                    longitude: 6.983147,
-                    zoom: 15,
-                  }}
-                  mapStyle="mapbox://styles/mapbox/navigation-night-v1"
-                  attributionControl={false}
-                ></Map>
-                <div className="p-2 border-2 bg-blue-400/50 rounded-full absolute">
-                  <img
-                    src="/memoji-face.png"
-                    alt="memoji"
-                    className="w-16 translate-y-1 -translate-x-0.5"
-                  />
-                </div>
-              </div>
-            </div>
-          </PinContainer>
+        <div className="lg:col-span-2 h-96 md:h-[401px]">
+          <div className="card !pb-0 h-full">
+            <img src="/portrait.png" className="h-full object-cover w-full" />
+          </div>
         </div>
       </div>
 
@@ -77,26 +79,11 @@ export default function Bento({ recentTracks }: { recentTracks: any }) {
       <div className="grid gap-3 lg:grid-cols-7">
         {/* right bento  */}
         <div className="lg:col-span-2 order-2 lg:order-1 grid lg:grid-cols-1 gap-3 lg:grid-rows-2">
-          <motion.div
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            initial={{ scale: 0.1, opacity: 0 }}
-            className=" rounded-3xl overflow-hidden relative p-[1px] flex"
-          >
-            <div className="absolute inset-0">
-              <MovingBorder duration={3000} rx="30%" ry="30%">
-                <div
-                  className={cn(
-                    "h-20 w-32 opacity-[0.8] bg-[radial-gradient(var(--neutral-400)_20%,transparent_80%)]",
-                  )}
-                />
-              </MovingBorder>
-            </div>
+          <div className=" rounded-3xl overflow-hidden relative p-[1px] flex">
             <div className="card z-50 h-full w-full gap-5 lg:gap-0 flex flex-col justify-between antialiased">
               <Image src={spotify} alt="spotify icon" className="w-16" />
 
-              <div>
+              <div onMouseEnter={textEnter} onMouseLeave={textLeave}>
                 <div className="flex items-center gap-2.5">
                   <AudioLines size={40} className="text-[#10BC4C]" />
                   {/* <Image src={play} /> */}
@@ -110,15 +97,13 @@ export default function Bento({ recentTracks }: { recentTracks: any }) {
                 </h4>
               </div>
             </div>
-          </motion.div>
-          <motion.div
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            initial={{ scale: 0.1, opacity: 0 }}
-            className="card flex flex-col gap-5 lg:gap-0 justify-between"
-          >
-            <h4 className="font-[CalSans] text-3xl">
+          </div>
+          <div className="card flex flex-col gap-5 lg:gap-0 justify-between">
+            <h4
+              onMouseEnter={textEnter}
+              onMouseLeave={textLeave}
+              className="font-[CalSans] text-3xl"
+            >
               let me bring your projects and ideas to life.
             </h4>
             <a href="mailto:emmanuelngoka778@gmail.com" className="w-full">
@@ -127,27 +112,12 @@ export default function Bento({ recentTracks }: { recentTracks: any }) {
                 email me
               </button>
             </a>
-          </motion.div>
+          </div>
         </div>
 
         {/* left bento */}
         <div className="lg:col-span-5 grid lg:grid-cols-1 gap-3 grid-rows-7">
-          <motion.div
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.5 }}
-            initial={{ scale: 0.1, opacity: 0 }}
-            className="flex rounded-3xl overflow-hidden relative h-56 !p-[1px] row-span-3"
-          >
-            <div className="absolute inset-0">
-              <MovingBorder duration={3000} rx="30%" ry="30%">
-                <div
-                  className={cn(
-                    "h-20 w-32 opacity-[0.8] bg-[radial-gradient(var(--neutral-400)_20%,transparent_80%)]",
-                  )}
-                />
-              </MovingBorder>
-            </div>
+          <div className="flex rounded-3xl overflow-hidden relative h-56 row-span-3">
             <div className="card !p-0 w-full h-full z-50">
               <div className="flex w-full h-full overflow-hidden">
                 <Image
@@ -171,71 +141,86 @@ export default function Bento({ recentTracks }: { recentTracks: any }) {
                 </div>
               </div>
             </div>
-          </motion.div>
-          <motion.div
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            initial={{ scale: 0.1, opacity: 0 }}
-            className=" rounded-3xl flex row-span-4 overflow-hidden"
-          >
-            <div className="card z-50 h-full w-full !p-0">
-              <h4 className="font-[CalSans] p-7 pb-0 text-3xl">
-                featured projects
-              </h4>
-              <InfiniteMovingCards />
+          </div>
+          <div className=" rounded-3xl relative h-72 projects-container row-span-4 overflow-hidden">
+            <div className="projects-card-top relative">
+              <div className="right-3 top-3 absolute z-50 w-full flex items-center">
+                <div className="ml-auto flex items-center gap-2.5">
+                  <a href={projects[1].url}>
+                    <button className="bg-neutral-800 rounded-full p-2">
+                      <Link2Icon />
+                    </button>
+                  </a>
+                  <button
+                    onClick={() => {
+                      setLayoutId(projects[1].title + String(1));
+                      setProject(projects[1]);
+                      setTimeout(() => setShow(true), 300);
+                    }}
+                    className="bg-neutral-800 rounded-full p-2"
+                  >
+                    <ArrowLeft className="rotate-[135deg]" />
+                  </button>
+                </div>
+              </div>
             </div>
-          </motion.div>
+            <div className="card projects-card z-50 h-full w-full !p-0">
+              <ProjectItem
+                index={1}
+                setProject={setProject}
+                setLayoutId={setLayoutId}
+                item={projects[1]}
+                setShow={setShow}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* projects bento */}
+      <div className="grid gap-3 lg:grid-cols-7">
+        <div className="lg:col-span-4 md:h-96">
+          <ProjectItem
+            index={2}
+            setProject={setProject}
+            setLayoutId={setLayoutId}
+            item={projects[2]}
+            setShow={setShow}
+          />
+        </div>
+        <div className="lg:col-span-3 md:h-96">
+          <ProjectItem
+            index={3}
+            setProject={setProject}
+            setLayoutId={setLayoutId}
+            item={projects[0]}
+            setShow={setShow}
+          />
         </div>
       </div>
       {/* socials  */}
       <div className="w-full grid lg:grid-cols-4 gap-5 items-center">
         <a href="https://github.com/zillalikestocode" className="lg:col-span-1">
-          <motion.button
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            initial={{ scale: 0.1, opacity: 0 }}
-            className="btn lg:col-span-1 w-full text-2xl font-[CalSans] tracking-wide"
-          >
+          <button className="btn lg:col-span-1 w-full text-2xl font-[CalSans] tracking-wide">
             github
-          </motion.button>
+          </button>
         </a>
         <a className="lg:col-span-1" href="https://twitter.com/_zxlla">
-          <motion.button
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            initial={{ scale: 0.1, opacity: 0 }}
-            className="btn w-full lg:col-span-1 text-2xl font-[CalSans] tracking-wide"
-          >
+          <button className="btn w-full lg:col-span-1 text-2xl font-[CalSans] tracking-wide">
             twitter
-          </motion.button>
+          </button>
         </a>
         <a className="lg:col-span-1" href="https://linkedin.com/in/engoka">
-          <motion.button
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            initial={{ scale: 0.1, opacity: 0 }}
-            className="btn w-full lg:col-span-1 text-2xl font-[CalSans] tracking-wide"
-          >
+          <button className="btn w-full lg:col-span-1 text-2xl font-[CalSans] tracking-wide">
             linkedin
-          </motion.button>
+          </button>
         </a>
         <a
           className="lg:col-span-1"
           href="https://instagram.com/the_emmanuelngoka"
         >
-          <motion.button
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            initial={{ scale: 0.1, opacity: 0 }}
-            className="btn w-full lg:col-span-1 text-2xl font-[CalSans] tracking-wide"
-          >
+          <button className="btn w-full lg:col-span-1 text-2xl font-[CalSans] tracking-wide">
             instagram
-          </motion.button>
+          </button>
         </a>
       </div>
     </div>

@@ -2,33 +2,79 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    cursor: none !important;
+}
+
 body {
-  font-family: "Switzer", sans-serif;
-  @apply bg-bg text-white;
+    font-family: "Switzer", sans-serif;
+    @apply bg-bg text-white;
 }
 
 .card {
-  @apply rounded-3xl border-border border bg-card p-7;
+    @apply rounded-3xl border-border border bg-card p-7;
+}
+
+.projects-card-top {
+    @apply ml-auto rounded-tr-3xl rounded-tl-[20px] w-[40%] md:w-[60%] p-7 bg-[#e1e1e1];
+}
+
+.card.projects-card {
+    @apply pt-0 !rounded-tr-none border-0 bg-[#e1e1e1];
+}
+
+.projects-container::before {
+    position: absolute;
+    left: 0;
+    /* z-index: 50; */
+    top: 0;
+    padding: 28px;
+    content: "";
+    background: transparent;
+    box-shadow: 30px 30px 0px #e1e1e1;
+    @apply md:w-[40%] w-[60%] rounded-br-3xl rounded-bl-3xl;
+}
+
+.projects-container::after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 10px;
+    content: "featured projects";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family:
+        Cal Sans,
+        sans-serif;
+    font-size: 20px;
+    border-radius: 90px;
+
+    @apply bg-card border border-border w-[calc(60%-6px)] md:w-[calc(40%-6px)];
 }
 
 button {
-  @apply border-border border rounded-full px-5 py-2.5 bg-button;
+    @apply border-border border rounded-full px-5 py-2.5 bg-button;
+}
+
+.cursor {
+    pointer-events: none;
 }
 
 nav {
-  background: linear-gradient(
-    90deg,
-    rgba(146, 127, 199, 0.02) 0%,
-    rgba(179, 165, 219, 0.04) 100%
-  );
-  @apply rounded-full border-border border p-2.5 px-7;
+    background: linear-gradient(
+        90deg,
+        rgba(146, 127, 199, 0.02) 0%,
+        rgba(179, 165, 219, 0.04) 100%
+    );
+    @apply rounded-full border-border border p-2.5 px-7;
 }
 
 .mapboxgl-canvas {
-  @apply rounded-3xl;
+    @apply rounded-3xl;
 }
 
 @font-face {
-  font-family: "CalSans";
-  src: url("../public/fonts/CalSans-SemiBold.otf") format("opentype");
+    font-family: "CalSans";
+    src: url("../public/fonts/CalSans-SemiBold.otf") format("opentype");
 }
