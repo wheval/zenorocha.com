@@ -48,7 +48,7 @@ export default function Main({ recentTracks }: { recentTracks: any }) {
         variants={variants}
         animate={cursorVariant}
         transition={{ duration: 0.1 }}
-        className="w-4 h-4 cursor z-[99] rounded-full bg-white fixed top-0 left-0"
+        className="w-4 h-4 cursor hidden md:block z-[99] rounded-full bg-white fixed top-0 left-0"
       />
     </main>
   );
