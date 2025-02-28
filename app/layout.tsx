@@ -26,7 +26,9 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body className="text-center flex items-center justify-center h-screen">
+        Nothing here yet! Chillax
+      </body>
     </html>
   );
 }
