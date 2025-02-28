@@ -4,6 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Wheval Meze-Egbe | Frontend Developer",
   description: "Creating innovative solutions.",
+  viewport: "width=device-width, initial-scale=1",
 };
 
 export default function RootLayout({
@@ -16,18 +17,8 @@ export default function RootLayout({
       className="scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-transparent"
       lang="en"
     >
-      <head>
-        <link
-          href="https://api.fontshare.com/v2/css?f[]=switzer@1&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css"
-          rel="stylesheet"
-        />
-      </head>
       <body className="text-center flex items-center justify-center h-screen">
-        Nothing here yet! Chillax
+        {children}
       </body>
     </html>
   );
