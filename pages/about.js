@@ -1,5 +1,5 @@
 import { styled } from '../stitches.config'
-import React from 'react'
+import React, { useRef } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import { parseISO, format, intervalToDuration } from 'date-fns'
@@ -9,9 +9,12 @@ import Pronunciation from '../components/Pronunciation'
 import Toast from '../components/Toast'
 import stripHtml from '../lib/strip-html'
 import items from '../data/about'
-import Lottie from 'lottie-react'
+import dynamic from 'next/dynamic'
 import copyBioIcon from '../public/static/icons/copy-bio.json'
 import downloadIcon from '../public/static/icons/download.json'
+
+// Dynamic import of Lottie with SSR disabled
+const Lottie = dynamic(() => import('lottie-react'), { ssr: false })
 
 export async function getStaticProps() {
   const meta = {

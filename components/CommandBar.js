@@ -12,7 +12,7 @@ import {
   KBarSearch,
   KBarResults,
 } from 'kbar'
-import Lottie from 'lottie-react'
+import dynamic from 'next/dynamic'
 import copyLinkIcon from '../public/static/icons/copy-link.json'
 import emailIcon from '../public/static/icons/email.json'
 import sourceIcon from '../public/static/icons/source.json'
@@ -25,6 +25,9 @@ import podcastsIcon from '../public/static/icons/podcasts.json'
 import investingIcon from '../public/static/icons/investing.json'
 import usesIcon from '../public/static/icons/uses.json'
 import reminderIcon from '../public/static/icons/reminder.json'
+
+// Dynamic import of Lottie with SSR disabled
+const Lottie = dynamic(() => import('lottie-react'), { ssr: false })
 
 export default function CommandBar(props) {
   const copyLinkRef = useRef()
