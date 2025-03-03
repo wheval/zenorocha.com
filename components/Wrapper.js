@@ -6,4 +6,7 @@ export const Wrapper = styled('div', {
   minHeight: '100vh',
   position: 'relative',
   zIndex: 0,
+  maxWidth: '1200px',
+  marginLeft: 'auto',
+  marginRight: 'auto',
 })

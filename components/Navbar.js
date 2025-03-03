@@ -4,81 +4,86 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { motion, AnimateSharedLayout } from 'framer-motion'
 import { useKBar } from 'kbar'
+import Logo from './Logo'
 
 export default function Navbar() {
   const router = useRouter()
   const pages = [
     'About',
-    'Articles',
+    // 'Articles',
     'Projects',
-    'Talks',
-    'Podcasts',
-    'Investing',
-    'Uses',
-    'Reminder',
+    // 'Talks',
+    // 'Podcasts',
+    // 'Investing',
+    // 'Uses',
+    // 'Reminder',
   ]
   const [hovered, setHovered] = useState('')
   const { query } = useKBar()
 
   return (
     <AnimateSharedLayout>
-      <Header>
-        <Link href="/" passHref>
-          <ButtonLogo as="a">z</ButtonLogo>
-        </Link>
+      <Wrapper>
+        <Header>
+          <Link href="/" passHref>
+            <ButtonLogo as="a">
+              <Logo />
+            </ButtonLogo>
+          </Link>
 
-        <Nav>
-          <List>
-            {pages.map(page => {
-              const path = `/${page.toLowerCase()}`
-              const isHovered = hovered === page
+          <Nav>
+            <List>
+              {pages.map(page => {
+                const path = `/${page.toLowerCase()}`
+                const isHovered = hovered === page
 
-              return (
-                <li key={page}>
-                  <Link href={path} passHref>
-                    <Anchor>
-                      <NavContainer
-                        onHoverStart={() => setHovered(page)}
-                        onHoverEnd={() => setHovered('')}
-                        css={
-                          router.pathname == path
-                            ? {
-                                color: '$primary',
-                                '&::after': { opacity: 1 },
-                              }
-                            : ''
-                        }
-                      >
-                        {isHovered && (
-                          <NavHovered
-                            layoutId="nav"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                          />
-                        )}
-                        {page}
-                      </NavContainer>
-                    </Anchor>
-                  </Link>
-                </li>
-              )
-            })}
-          </List>
-        </Nav>
+                return (
+                  <li key={page}>
+                    <Link href={path} passHref>
+                      <Anchor>
+                        <NavContainer
+                          onHoverStart={() => setHovered(page)}
+                          onHoverEnd={() => setHovered('')}
+                          css={
+                            router.pathname == path
+                              ? {
+                                  color: '$primary',
+                                  '&::after': { opacity: 1 },
+                                }
+                              : ''
+                          }
+                        >
+                          {isHovered && (
+                            <NavHovered
+                              layoutId="nav"
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                            />
+                          )}
+                          {page}
+                        </NavContainer>
+                      </Anchor>
+                    </Link>
+                  </li>
+                )
+              })}
+            </List>
+          </Nav>
 
-        <Aside>
-          <ButtonHeader
-            as="button"
-            type="button"
-            aria-label="Command"
-            onClick={query.toggle}
-            css={{ padding: '0 8px' }}
-          >
-            <Icon className="ri-command-line" />
-          </ButtonHeader>
-        </Aside>
-      </Header>
+          <Aside>
+            <ButtonHeader
+              as="button"
+              type="button"
+              aria-label="Command"
+              onClick={query.toggle}
+              css={{ padding: '0 8px' }}
+            >
+              <Icon className="ri-command-line" />
+            </ButtonHeader>
+          </Aside>
+        </Header>
+      </Wrapper>
     </AnimateSharedLayout>
   )
 }
@@ -89,13 +94,23 @@ const Header = styled('header', {
   color: 'white',
   fontSize: '12px',
   minHeight: '59px',
-  width: '100%',
-  flexWrap: 'wrap',
   position: 'absolute',
+  maxWidth: '1200px',
+  margin: '0 auto',
   top: '0',
+  left: '0',
+  right: '0',
   zIndex: 3,
   marginTop: '13px',
   '@bp2': { marginTop: '0' },
+})
+
+const Wrapper = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  width: '100%',
+  flexWrap: 'wrap',
+  width: '100vw',
 })
 
 const List = styled('ul', {
