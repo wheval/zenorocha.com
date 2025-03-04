@@ -7,6 +7,7 @@ import Base from '../layouts/Base'
 import { ButtonPrimary } from '../components/ButtonPrimary'
 import Pronunciation from '../components/Pronunciation'
 import Toast from '../components/Toast'
+import Toolbox from '../components/Toolbox'
 import stripHtml from '../lib/strip-html'
 import items from '../data/about'
 import dynamic from 'next/dynamic'
@@ -18,13 +19,13 @@ const Lottie = dynamic(() => import('lottie-react'), { ssr: false })
 
 export async function getStaticProps() {
   const meta = {
-    title: 'About // Zeno Rocha',
+    title: 'About // Wheval',
     description:
-      "Zeno Rocha is a Brazilian creator and programmer. He currently lives in San Francisco, California, where he's the Founder & CEO at Resend. His lifelong appreciation for building software and sharing knowledge led him to speak in over 110 conferences worldwide. His passion for open source put him on the top 20 most active users on GitHub at age 22. Before moving to the US, Zeno developed multiple applications, mentored startups, and worked at major companies in Latin America, such as Globo and Petrobras.",
-    tagline: 'Create. Share. Repeat.',
+      "Wheval is a Frontend Developer and Open Source Contributor.",
+    tagline: 'Build. Contribute. Repeat.',
     image: '/static/images/about-bw.jpg',
-    primaryColor: 'pink',
-    secondaryColor: 'purple',
+    primaryColor: 'cyan',
+    secondaryColor: 'green',
   }
 
   return { props: meta }
@@ -44,7 +45,7 @@ function About(props) {
         <Section>
           <Image
             alt="Zeno"
-            src="/static/images/avatar.jpg"
+            src="/static/images/avatar.jpeg"
             width="336"
             height="336"
             placeholder="blur"
@@ -59,20 +60,17 @@ function About(props) {
               '@bp2': { marginTop: '-6px' },
             }}
           >
-            <strong>Hey, I'm Zeno Rocha</strong>
-            <Pronunciation />
-            I started as a software engineer back in 2009, working with Flash.
+              <strong>Hey, I'm Wheval.</strong><br/>
+            {/* <Pronunciation /> */}
           </Paragraph>
           <Paragraph>
-            I'm the <strong>Founder & CEO</strong> at
-            Resend. Before that, I was a VP of Developer Experience at WorkOS and CPO at Liferay Cloud. I'm originally
-            from Brazil and now living in{' '}
-            <strong>San Francisco, California</strong> with my amazing wife and
-            beautiful daughter.
+            I'm a Frontend Developer with experience building software products. I'm currently working as an <strong>Open Source Developer</strong>.
+            I'm also a student of Electrical Engineering.
+
           </Paragraph>
           <Paragraph>
-            <strong>I love dark mode</strong>, open source, and side projects.
-            When I'm not working, I like running, watching movies, and{' '}
+            <strong>I love dark mode</strong>, open source, and blockchain technology.
+            When I'm not working, I like making music, watching movies, and{' '}
             <strong>eating cheese</strong>.
           </Paragraph>
         </Section>
@@ -80,48 +78,48 @@ function About(props) {
     )
   }
 
-  const renderBio = () => {
-    const btnStyle = { display: 'inline-flex', justifyContent: 'center', alignItems: 'center' }
-    const iconStyle = { width: 24, height: 24, marginRight: 8 }
+  // const renderBio = () => {
+  //   const btnStyle = { display: 'inline-flex', justifyContent: 'center', alignItems: 'center' }
+  //   const iconStyle = { width: 24, height: 24, marginRight: 8 }
 
-    return (
-      <div>
-        <p>
-          This is made for journalists, podcast hosts, and event organizers to
-          copy-and-paste.
-        </p>
-        <blockquote>
-          <p>{description}</p>
-        </blockquote>
-        <ButtonsContainer>
-          <ButtonPrimary
-            as="button"
-            style={btnStyle}
-            onClick={copyBio}
-            onMouseEnter={() => copyBioRef.current?.play()}
-            onMouseLeave={() => copyBioRef.current?.stop()}
-          >
-            <Lottie lottieRef={copyBioRef} style={iconStyle} animationData={copyBioIcon} loop={false} autoplay={false} />
-            Copy Bio
-          </ButtonPrimary>
-          <span style={{ margin: '0 20px 0 10px' }}>•</span>
-          <ButtonPrimary
-            as="a"
-            download
-            role="button"
-            href="/static/images/avatar.jpg"
-            style={btnStyle}
-            onClick={downloadHeadshot}
-            onMouseEnter={() => downloadRef.current?.play()}
-            onMouseLeave={() => downloadRef.current?.stop()}
-          >
-            <Lottie lottieRef={downloadRef} style={iconStyle} animationData={downloadIcon} loop={false} autoplay={false} />
-            Download Headshot
-          </ButtonPrimary>
-        </ButtonsContainer>
-      </div>
-    )
-  }
+  //   return (
+  //     <div>
+  //       <p>
+  //         This is made for journalists, podcast hosts, and event organizers to
+  //         copy-and-paste.
+  //       </p>
+  //       <blockquote>
+  //         <p>{description}</p>
+  //       </blockquote>
+  //       <ButtonsContainer>
+  //         <ButtonPrimary
+  //           as="button"
+  //           style={btnStyle}
+  //           onClick={copyBio}
+  //           onMouseEnter={() => copyBioRef.current?.play()}
+  //           onMouseLeave={() => copyBioRef.current?.stop()}
+  //         >
+  //           <Lottie lottieRef={copyBioRef} style={iconStyle} animationData={copyBioIcon} loop={false} autoplay={false} />
+  //           Copy Bio
+  //         </ButtonPrimary>
+  //         <span style={{ margin: '0 20px 0 10px' }}>•</span>
+  //         <ButtonPrimary
+  //           as="a"
+  //           download
+  //           role="button"
+  //           href="/static/images/avatar.jpg"
+  //           style={btnStyle}
+  //           onClick={downloadHeadshot}
+  //           onMouseEnter={() => downloadRef.current?.play()}
+  //           onMouseLeave={() => downloadRef.current?.stop()}
+  //         >
+  //           <Lottie lottieRef={downloadRef} style={iconStyle} animationData={downloadIcon} loop={false} autoplay={false} />
+  //           Download Headshot
+  //         </ButtonPrimary>
+  //       </ButtonsContainer>
+  //     </div>
+  //   )
+  // }
 
   const renderAll = () => {
     return items.map((item, index) => {
@@ -197,8 +195,8 @@ function About(props) {
 
       {renderIntro()}
 
-      <h2>Bio</h2>
-      {renderBio()}
+
+      <Toolbox />
 
       <h2>Career</h2>
       {renderAll()}

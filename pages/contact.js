@@ -8,8 +8,8 @@ import { styled } from '../stitches.config'
 
 export async function getStaticProps() {
   const meta = {
-    title: 'Contact // Zeno Rocha',
-    tagline: 'Emails. Emails. Emails.',
+    title: 'Contact // Wheval',
+    tagline: 'Reach out.',
     image: '/static/images/reminder-bw.jpg',
     primaryColor: 'cyan',
     secondaryColor: 'green',
@@ -29,7 +29,7 @@ function Contact(props) {
 
     try {
       const isProd = process.env.NODE_ENV === 'production'
-      const base = isProd ? 'https://zenorocha.com' : 'http://localhost:3000'
+      const base = isProd ? 'https://wheval.tech' : 'http://localhost:3000'
 
       await fetch(`${base}/api/email`, {
         method: 'POST',
@@ -58,8 +58,8 @@ function Contact(props) {
         <meta content={title} property="og:title" />
         <meta content={stripHtml(description)} name="description" />
         <meta content={stripHtml(description)} property="og:description" />
-        <meta content="https://zenorocha.com/contact" property="og:url" />
-        <meta content={`https://zenorocha.com${image}`} property="og:image" />
+        <meta content="https://wheval.tech/contact" property="og:url" />
+        <meta content={`https://wheval.tech${image}`} property="og:image" />
       </Head>
 
       <Box>
@@ -85,7 +85,7 @@ function Contact(props) {
 
         <Toast
           title={isEmailSent ? 'Email sent :D' : 'Error :('}
-          description={isEmailSent ? 'Thanks for taking the time to write it.' : 'Something wrong happened. Try again later.'}
+          description={isEmailSent ? 'Thanks for reaching out. I\'ll get back to you ASAP!.' : 'Something wrong happened. Try again later.'}
           isSuccess={isEmailSent}
           showToast={showToast}
           setShowToast={setShowToast}

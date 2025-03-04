@@ -9,13 +9,13 @@ function Post(props) {
     return <ErrorMessage code={props.errorCode} />
   }
 
-  const title = `${props.title} // Zeno Rocha`
+  const title = `${props.title} // Wheval`
   const description = props.description || ''
-  const url = `https://zenorocha.com/${props.slug}`
+  const url = `https://wheval.tech/${props.slug}`
   const date = new Date(props.date).toISOString()
   const image = props.image
-    ? `https://zenorocha.com${props.image}`
-    : 'https://zenorocha.com/static/images/home-opt.jpg'
+    ? `https://wheval.tech${props.image}`
+    : 'https://wheval.tech/static/images/home-opt.jpg'
 
   return (
     <>
@@ -33,7 +33,7 @@ function Post(props) {
       </Head>
 
       <ArticleJsonLd
-        authorName="Zeno Rocha"
+        authorName="Wheval"
         type="Blog"
         url={url}
         title={title}

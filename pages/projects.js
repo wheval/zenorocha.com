@@ -9,8 +9,8 @@ import items from '../data/projects'
 
 export async function getStaticProps() {
   const meta = {
-    title: 'Projects // Zeno Rocha',
-    tagline: 'Work. Hobby. Open Source.',
+    title: 'Projects // Wheval',
+    tagline: 'Work. Fun. Open Source.',
     image: '/static/images/projects-bw.jpg',
     primaryColor: 'cyan',
     secondaryColor: 'green',
@@ -64,7 +64,7 @@ function Projects(props) {
   }
 
   const { title, image } = props
-  const description = `I'm obsessed with side projects and <strong>building in public</strong>. Here you can navigate to <strong>${getTotalProjects()} different</strong> websites, apps, and libraries I built. Some projects are still active, others have been discontinued.`
+  const description = `I'm obsessed with side projects and <strong>building in public</strong>. Here you can navigate different stuffs I built.`
 
   return (
     <>
@@ -73,18 +73,21 @@ function Projects(props) {
         <meta content={title} property="og:title" />
         <meta content={stripHtml(description)} name="description" />
         <meta content={stripHtml(description)} property="og:description" />
-        <meta content="https://zenorocha.com/projects" property="og:url" />
-        <meta content={`https://zenorocha.com${image}`} property="og:image" />
+        <meta content="https://wheval.tech/projects" property="og:url" />
+        <meta content={`https://wheval.tech${image}`} property="og:image" />
       </Head>
 
       <AnimateSharedLayout>
         <p dangerouslySetInnerHTML={{ __html: description }} />
 
-        <h2>Featured Projects</h2>
-        <FeaturedProjects>{renderFeatured()}</FeaturedProjects>
+        <h2>Still been Updated</h2>
+        <p>Plot twist: My projects are like my gym membership - they exist in theory, but you can't see them yet! 🏋️‍♂️</p>
+
+        {/* <h2>Featured Projects</h2> */}
+        {/* <FeaturedProjects>{renderFeatured()}</FeaturedProjects>
 
         <h2>All Projects</h2>
-        {renderAll()}
+        {renderAll()} */}
       </AnimateSharedLayout>
     </>
   )
